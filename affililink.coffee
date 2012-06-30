@@ -13,10 +13,10 @@ affililink = ->
   for url in a
     # remove internal links, mailto etc
     unless url.href.substring(0, 7) is 'http://' or url.href.substring(0, 8) is 'https://'
-      break
+      continue
     domain = url.href.split("/")[2]
     if not domain
-      break
+      continue
     else
       
       # ebay

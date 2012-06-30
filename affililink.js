@@ -17,11 +17,11 @@ affililink = function() {
   for (_i = 0, _len = a.length; _i < _len; _i++) {
     url = a[_i];
     if (!(url.href.substring(0, 7) === 'http://' || url.href.substring(0, 8) === 'https://')) {
-      break;
+      continue;
     }
     domain = url.href.split("/")[2];
     if (!domain) {
-      break;
+      continue;
     } else {
       if (ebay['campaign'] && ebay['country']) {
         ebay_domains = ['ebay.com.au', 'ebay.at', 'ebay.be', 'ebay.ca', 'ebay.ch', 'ebay.de', 'ebay.es', 'ebayanuncios.es', 'ebay.fr', 'ebay.ie', 'ebay.it', 'ebay.nl', 'ebay.co.uk', 'ebay.com', 'half.com'];
@@ -85,15 +85,15 @@ affililink = function() {
         }
         if (amazon[amazon_domain]) {
           url.href = url.href.replace(/tag=([a-z0-9\-]+)/g, '');
-          url.href = url.href.replace('&&', '&');
-          if (url.href.substring(-1, 1) === '/') {
-            url.href = url.href.substring(0, url.href.length - 1);
-          }
-          if (!url.href.split("/")[3]) {
-            url.href += '?tag=' + amazon[amazon_domain];
-          } else {
-            url.href += '&tag=' + amazon[amazon_domain];
-          }
+        }
+        url.href = url.href.replace('&&', '&');
+        if (url.href.substring(-1, 1) === '/') {
+          url.href = url.href.substring(0, url.href.length - 1);
+        }
+        if (!url.href.split("/")[3]) {
+          url.href += '?tag=' + amazon[amazon_domain];
+        } else {
+          url.href += '&tag=' + amazon[amazon_domain];
         }
       }
     }
