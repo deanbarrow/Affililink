@@ -75,8 +75,7 @@ affililink = ->
           continue
         
         if amazon[amazon_domain]
-            url.href = url.href.replace /tag=([a-z0-9\-]+)/g,
-            ''
+          url.href = url.href.replace /tag=([a-z0-9\-]+)/g, ''
           url.href = url.href.replace '&&', '&'
           if url.href.substring(-1, 1) is '/'
             url.href = url.href.substring(0, url.href.length - 1)
