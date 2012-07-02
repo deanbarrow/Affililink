@@ -1,21 +1,26 @@
-# Affililink v0.2
-# http://affililink.com
-# Created by Dean Barrow (http://deanbarrow.co.uk)
+###
+*  Affililink v0.2
+*  http://affililink.com
+*  Created by Dean Barrow (http://deanbarrow.co.uk)
+*
+*  Changelog
+*  v0.1 First release
+*  v0.2 Added Javari support
+###
 
-# run affililink
 affililink = ->
 
-  # enter your affiliate info
+  ### enter your affiliate codes below ###
   amazon = 'amazon.co.uk': '', 'amazon.com': '', 'amazon.de': '', 'amazon.fr': '', 'javari.co.uk': '', 'javari.de': '', 'javari.fr': ''
   ebay = 'campaign': 0, 'country': ''
 
-  # find all A tags
+  ### find all A tags ###
   a = document.getElementsByTagName("a")
   host = window.location.hostname
 
-  # loop through links
+  ### loop through links ###
   for url in a
-    # remove internal links, mailto etc
+    ### remove internal links, mailto etc ###
     unless url.href.substring(0, 7) is 'http://' or url.href.substring(0, 8) is 'https://'
       continue
     domain = url.href.split("/")[2]
@@ -23,7 +28,7 @@ affililink = ->
       continue
     else
       
-      # ebay
+      ### ebay ###
       if ebay['campaign'] and ebay['country']
         ebay_domains = ['ebay.com.au', 'ebay.at', 'ebay.be', 'ebay.ca', 'ebay.ch', 'ebay.de', 'ebay.es', 'ebayanuncios.es', 'ebay.fr', 'ebay.ie', 'ebay.it', 'ebay.nl', 'ebay.co.uk', 'ebay.com', 'half.com']
         for ebay_domain in ebay_domains
@@ -63,7 +68,7 @@ affililink = ->
           else
             url.href = 'http://rover.ebay.com/rover/1/' + ebay['code'] + '/1?ff3=4&pub=5574962087&toolid=10001&campid=' + ebay['campaign'] + '&customid=affililink&mpre=' + encodeURIComponent(url.href)
  
-      # amazon & javari
+      ### amazon & javari ###
       amazon_domains = ['amazon.co.uk', 'amazon.com', 'amazon.de', 'amazon.fr', 'javari.co.uk', 'javari.de', 'javari.fr']
       for amazon_domain in amazon_domains
         unless domain is amazon_domain or domain.substring(domain.length - amazon_domain.length - 1) is '.'+amazon_domain
@@ -81,7 +86,7 @@ affililink = ->
           else
             url.href += '&tag=' + amazon[amazon_domain]
 
-# only run when page has loaded
+### only run when page has loaded ###
 if window.attachEvent
   window.attachEvent "onload", affililink
 else
