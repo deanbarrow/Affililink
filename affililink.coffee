@@ -1,9 +1,13 @@
+# Affililink v0.2
+# http://affililink.com
+# Created by Dean Barrow (http://deanbarrow.co.uk)
+
 # run affililink
 affililink = ->
 
   # enter your affiliate info
-  amazon = 'amazon.co.uk': 'affililink-21', 'amazon.com': 'affililink-20', 'amazon.de': '', 'amazon.fr': ''
-  ebay = 'campaign': 5336854507, 'country': 'UK'
+  amazon = 'amazon.co.uk': '', 'amazon.com': '', 'amazon.de': '', 'amazon.fr': '', 'javari.co.uk': '', 'javari.de': '', 'javari.fr': ''
+  ebay = 'campaign': 0, 'country': ''
 
   # find all A tags
   a = document.getElementsByTagName("a")
@@ -59,8 +63,8 @@ affililink = ->
           else
             url.href = 'http://rover.ebay.com/rover/1/' + ebay['code'] + '/1?ff3=4&pub=5574962087&toolid=10001&campid=' + ebay['campaign'] + '&customid=affililink&mpre=' + encodeURIComponent(url.href)
  
-      # amazon
-      amazon_domains = ['amazon.co.uk', 'amazon.com', 'amazon.de', 'amazon.fr']
+      # amazon & javari
+      amazon_domains = ['amazon.co.uk', 'amazon.com', 'amazon.de', 'amazon.fr', 'javari.co.uk', 'javari.de', 'javari.fr']
       for amazon_domain in amazon_domains
         unless domain is amazon_domain or domain.substring(domain.length - amazon_domain.length - 1) is '.'+amazon_domain
           continue

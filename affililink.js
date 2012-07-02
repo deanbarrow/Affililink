@@ -1,3 +1,8 @@
+/***
+* Affililink v0.2
+* http://affililink.com
+* Created by Dean Barrow (http://deanbarrow.co.uk)
+***/
 var affililink, curronload, newonload;
 affililink = function() {
   var a, amazon, amazon_domain, amazon_domains, domain, ebay, ebay_domain, ebay_domains, host, url, _i, _j, _k, _len, _len2, _len3, _results;
