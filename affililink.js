@@ -7,6 +7,7 @@ affililink = function() {
     'amazon.de': '',
     'amazon.fr': ''
   };
+  amazon['javari.de'] = amazon['amazon.de'];
   ebay = {
     'campaign': 5336854507,
     'country': 'UK'
