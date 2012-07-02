@@ -1,26 +1,37 @@
-/***
-* Affililink v0.2
-* http://affililink.com
-* Created by Dean Barrow (http://deanbarrow.co.uk)
-***/
+/*
+*  Affililink v0.2
+*  http://affililink.com
+*  Created by Dean Barrow (http://deanbarrow.co.uk)
+*
+*  Changelog
+*  v0.1 First release
+*  v0.2 Added Javari support
+*/
 var affililink, curronload, newonload;
 affililink = function() {
+  /* enter your affiliate codes below */
   var a, amazon, amazon_domain, amazon_domains, domain, ebay, ebay_domain, ebay_domains, host, url, _i, _j, _k, _len, _len2, _len3, _results;
   amazon = {
-    'amazon.co.uk': 'affililink-21',
-    'amazon.com': 'affililink-20',
+    'amazon.co.uk': '',
+    'amazon.com': '',
     'amazon.de': '',
-    'amazon.fr': ''
+    'amazon.fr': '',
+    'javari.co.uk': '',
+    'javari.de': '',
+    'javari.fr': ''
   };
   ebay = {
-    'campaign': 5336854507,
-    'country': 'UK'
+    'campaign': 0,
+    'country': ''
+    /* find all A tags */
   };
   a = document.getElementsByTagName("a");
   host = window.location.hostname;
+  /* loop through links */
   _results = [];
   for (_i = 0, _len = a.length; _i < _len; _i++) {
     url = a[_i];
+    /* remove internal links, mailto etc */
     if (!(url.href.substring(0, 7) === 'http://' || url.href.substring(0, 8) === 'https://')) {
       continue;
     }
@@ -28,6 +39,7 @@ affililink = function() {
     if (!domain) {
       continue;
     } else {
+      /* ebay */
       if (ebay['campaign'] && ebay['country']) {
         ebay_domains = ['ebay.com.au', 'ebay.at', 'ebay.be', 'ebay.ca', 'ebay.ch', 'ebay.de', 'ebay.es', 'ebayanuncios.es', 'ebay.fr', 'ebay.ie', 'ebay.it', 'ebay.nl', 'ebay.co.uk', 'ebay.com', 'half.com'];
         for (_j = 0, _len2 = ebay_domains.length; _j < _len2; _j++) {
@@ -82,7 +94,8 @@ affililink = function() {
           }
         }
       }
-      amazon_domains = ['amazon.co.uk', 'amazon.com', 'amazon.de', 'amazon.fr'];
+      /* amazon & javari */
+      amazon_domains = ['amazon.co.uk', 'amazon.com', 'amazon.de', 'amazon.fr', 'javari.co.uk', 'javari.de', 'javari.fr'];
       for (_k = 0, _len3 = amazon_domains.length; _k < _len3; _k++) {
         amazon_domain = amazon_domains[_k];
         if (!(domain === amazon_domain || domain.substring(domain.length - amazon_domain.length - 1) === '.' + amazon_domain)) {
@@ -105,6 +118,7 @@ affililink = function() {
   }
   return _results;
 };
+/* only run when page has loaded */
 if (window.attachEvent) {
   window.attachEvent("onload", affililink);
 } else {
