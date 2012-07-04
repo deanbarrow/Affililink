@@ -10,10 +10,8 @@ Full details at http://affililink.com/.
 First release, basic working version with Amazon and eBay.
 
 ### v0.2 - 4th July 2012
-Reshuffled code, created a new function for each affiliate scheme.
-
-Track clicked links with Google Analytics (Event: Affililink > Site > URL).
-
+Reshuffled code, created a new function for each affiliate scheme.  
+Track clicked links with Google Analytics (Event: Affililink > Site > URL).  
 Added support for Javari (UK, DE, FR), Amazon Supply, Amazon Wireless, Endless.
 
 ## Todo
