@@ -6,15 +6,17 @@ Just add your affiliate codes to the top of the script then link to it from your
 Full details at http://affililink.com/.
 
 ## Changelog
-### v0.1 7th May 2012
+### v0.1 - 7th May 2012
 First release, basic working version with Amazon and eBay.
 
-### v0.2 4th July 2012
+### v0.2 - 4th July 2012
 Reshuffled code, created a new function for each affiliate scheme.
+
 Track clicked links with Google Analytics (Event: Affililink > Site > URL).
+
 Added support for Javari (UK, DE, FR), Amazon Supply, Amazon Wireless, Endless.
 
-## TODO
+## Todo
 
 * Create addTagToEnd universal function (for amazon style tags)
 * Add replace existing tag option
