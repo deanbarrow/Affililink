@@ -7,8 +7,8 @@
 affililink = ->
 
   ### enter your affiliate codes below ###
-  amazon_code = 'amazon.co.uk': '', 'amazon.com': '', 'amazon.de': '', 'amazon.fr': '', 'javari.co.uk': '', 'javari.de': '', 'javari.fr': '', 'amazonsupply.com': '', 'amazonwireless.com': '', 'endless.com': ''
-  ebay_code = 'campaign': 0, 'country': ''
+  amazonCode = 'amazon.co.uk': '', 'amazon.com': '', 'amazon.de': '', 'amazon.fr': '', 'javari.co.uk': '', 'javari.de': '', 'javari.fr': '', 'amazonsupply.com': '', 'amazonwireless.com': '', 'endless.com': ''
+  ebayCode = 'campaign': 0, 'country': ''
   options = 'replace_links': true, 'track_views': false, 'track_clicks': true
 
   ### DO NOT EDIT BELOW THIS LINE ###
@@ -24,68 +24,68 @@ affililink = ->
 
   ### ebay ###
   ebay = (url) ->
-    if ebay_code['campaign'] and ebay_code['country']
-      ebay_domains = ['ebay.com.au', 'ebay.at', 'ebay.be', 'ebay.ca', 'ebay.ch', 'ebay.de', 'ebay.es', 'ebayanuncios.es', 'ebay.fr', 'ebay.ie', 'ebay.it', 'ebay.nl', 'ebay.co.uk', 'ebay.com', 'half.com']
-      for ebay_domain in ebay_domains
-        unless domain is ebay_domain or domain.substring(domain.length - ebay_domain.length - 1) is '.'+ebay_domain
+    if ebayCode['campaign'] and ebayCode['country']
+      ebayDomains = ['ebay.com.au', 'ebay.at', 'ebay.be', 'ebay.ca', 'ebay.ch', 'ebay.de', 'ebay.es', 'ebayanuncios.es', 'ebay.fr', 'ebay.ie', 'ebay.it', 'ebay.nl', 'ebay.co.uk', 'ebay.com', 'half.com']
+      for ebayDomain in ebayDomains
+        unless domain is ebayDomain or domain.substring(domain.length - ebayDomain.length - 1) is '.'+ebayDomain
           continue
           
-        switch ebay_code['country']
+        switch ebayCode['country']
           when 'AT'
-            ebay_code['code'] = '5221-53469-19255-0'
+            ebayCode['code'] = '5221-53469-19255-0'
           when 'AU'
-            ebay_code['code'] = '705-53470-19255-0'
+            ebayCode['code'] = '705-53470-19255-0'
           when 'BE'
-            ebay_code['code'] = '1553-53471-19255-0'
+            ebayCode['code'] = '1553-53471-19255-0'
           when 'CA'
-            ebay_code['code'] = '706-53473-19255-0'
+            ebayCode['code'] = '706-53473-19255-0'
           when 'CH'
-            ebay_code['code'] = '5222-53480-19255-0'
+            ebayCode['code'] = '5222-53480-19255-0'
           when 'DE'
-            ebay_code['code'] = '707-53477-19255-0'
+            ebayCode['code'] = '707-53477-19255-0'
           when 'ES'
-            ebay_code['code'] = '1185-53479-19255-0'
+            ebayCode['code'] = '1185-53479-19255-0'
           when 'FR'
-            ebay_code['code'] = '709-53476-19255-0'
+            ebayCode['code'] = '709-53476-19255-0'
           when 'IE'
-            ebay_code['code'] = '5282-53468-19255-0'
+            ebayCode['code'] = '5282-53468-19255-0'
           when 'IT'
-            ebay_code['code'] = '724-53478-19255-0'
+            ebayCode['code'] = '724-53478-19255-0'
           when 'NL'
-            ebay_code['code'] = '1346-53482-19255-0'
+            ebayCode['code'] = '1346-53482-19255-0'
           when 'UK'
-            ebay_code['code'] = '710-53481-19255-0'
+            ebayCode['code'] = '710-53481-19255-0'
           when 'US'
-            ebay_code['code'] = '711-53200-19255-0'
+            ebayCode['code'] = '711-53200-19255-0'
         
         ### replace their link ###
         if domain is 'rover.ebay.com'
           if options['replace_links']
-            url.href = url.href.replace /campid=([0-9]+)/g, 'campid=' + ebay_code['campaign']
-            url.href = url.href.replace /rover\/1\/([0-9\-]+)/g, 'rover/1/' + ebay_code['code']
+            url.href = url.href.replace /campid=([0-9]+)/g, 'campid=' + ebayCode['campaign']
+            url.href = url.href.replace /rover\/1\/([0-9\-]+)/g, 'rover/1/' + ebayCode['code']
             return true
           else return false
           
         if domain.substring(domain.length - 'half.com'.length) is 'half.com'
-          ebay_code['code'] = '8971-56017-19255-0'
+          ebayCode['code'] = '8971-56017-19255-0'
 
-        url.href = 'http://rover.ebay.com/rover/1/' + ebay_code['code'] + '/1?ff3=4&pub=5574962087&toolid=10001&campid=' + ebay_code['campaign'] + '&customid=affililink&mpre=' + encodeURIComponent(url.href)
+        url.href = 'http://rover.ebay.com/rover/1/' + ebayCode['code'] + '/1?ff3=4&pub=5574962087&toolid=10001&campid=' + ebayCode['campaign'] + '&customid=affililink&mpre=' + encodeURIComponent(url.href)
         return true
         
   ### amazon & javari ###
   amazon = (url) ->
-    amazon_domains = ['amazon.co.uk', 'amazon.com', 'amazon.de', 'amazon.fr', 'javari.co.uk', 'javari.de', 'javari.fr', 'amazonsupply.com', 'amazonwireless.com', 'endless.com']
-    for amazon_domain in amazon_domains
-      unless domain is amazon_domain or domain.substring(domain.length - amazon_domain.length - 1) is '.'+amazon_domain
+    amazonDomains = ['amazon.co.uk', 'amazon.com', 'amazon.de', 'amazon.fr', 'javari.co.uk', 'javari.de', 'javari.fr', 'amazonsupply.com', 'amazonwireless.com', 'endless.com']
+    for amazonDomain in amazonDomains
+      unless domain is amazonDomain or domain.substring(domain.length - amazonDomain.length - 1) is '.'+amazonDomain
         continue
       
-      if not amazon_code[amazon_domain]
+      if not amazonCode[amazonDomain]
         return false
       
       # if existing affiliate tag
       if url.href.search(/tag=([a-z0-9\-]+)/) > -1
         if options['replace_links']
-          url.href = url.href.replace /tag=([a-z0-9\-]+)/g, 'tag=' + amazon_code[amazon_domain]
+          url.href = url.href.replace /tag=([a-z0-9\-]+)/g, 'tag=' + amazonCode[amazonDomain]
           return true
         else return false
         
@@ -94,9 +94,9 @@ affililink = ->
         url.href = url.href.substring(0, url.href.length - 1)
         
       if not url.href.split("/")[3]
-        url.href += '?tag=' + amazon_code[amazon_domain]
+        url.href += '?tag=' + amazonCode[amazonDomain]
       else
-        url.href += '&tag=' + amazon_code[amazon_domain]
+        url.href += '&tag=' + amazonCode[amazonDomain]
 
       return true
         
