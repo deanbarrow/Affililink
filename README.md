@@ -9,6 +9,8 @@ Full details at http://affililink.com/.
 
 ### v0.21 - XXX
 - Added support to track views as well as clicks on GA.
+- Option to replace existing links with your own codes or leave as they are.
+- Ability to replace ebay affiliate links with your own.
 
 ### v0.2 - 4th July 2012
 - Reshuffled code, created a new function for each affiliate scheme.  
@@ -21,7 +23,5 @@ First release, basic working version with Amazon and eBay.
 ## Todo
 
 * Create addTagToEnd universal function (for amazon style tags)
-* Add replace existing tag option
-* Add replace rover.ebay.com tag functionality
 * Add function to rewrite individual links (which are loaded by ajax after page has loaded)
 * Create script to test links
