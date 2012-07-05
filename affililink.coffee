@@ -83,8 +83,7 @@ affililink = ->
         return false
       
       # if existing affiliate tag
-      # FIX THIS BIT
-      if url.href.search /tag=([a-z0-9\-]+)/ > -1
+      if url.href.search(/tag=([a-z0-9\-]+)/) > -1
         if options['replace_links']
           url.href = url.href.replace /tag=([a-z0-9\-]+)/g, 'tag=' + amazon_code[amazon_domain]
           return true
