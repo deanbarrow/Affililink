@@ -64,7 +64,7 @@ affililink = ->
             url.href = url.href.replace /campid=([0-9]+)/g, 'campid=' + ebay_code['campaign']
             url.href = url.href.replace /rover\/1\/([0-9\-]+)/g, 'rover/1/' + ebay_code['code']
             return true
-          else return true
+          else return false
           
         if domain.substring(domain.length - 'half.com'.length) is 'half.com'
           ebay_code['code'] = '8971-56017-19255-0'
@@ -79,19 +79,27 @@ affililink = ->
       unless domain is amazon_domain or domain.substring(domain.length - amazon_domain.length - 1) is '.'+amazon_domain
         continue
       
-      if amazon_code[amazon_domain]
+      if not amazon_code[amazon_domain]
+        return false
+      
+      # if existing affiliate tag
+      # FIX THIS BIT
+      if url.href.search /tag=([a-z0-9\-]+)/ > -1
         if options['replace_links']
-          url.href = url.href.replace /tag=([a-z0-9\-]+)/g, ''
-          url.href = url.href.replace '&&', '&'
-        if url.href.substring(-1, 1) is '/'
-          url.href = url.href.substring(0, url.href.length - 1)
-          
-        if not url.href.split("/")[3]
-          url.href += '?tag=' + amazon_code[amazon_domain]
-        else
-          url.href += '&tag=' + amazon_code[amazon_domain]
+          url.href = url.href.replace /tag=([a-z0-9\-]+)/g, 'tag=' + amazon_code[amazon_domain]
+          return true
+        else return false
+        
+      # if trailing slash, remove it
+      if url.href.substring(-1, 1) is '/'
+        url.href = url.href.substring(0, url.href.length - 1)
+        
+      if not url.href.split("/")[3]
+        url.href += '?tag=' + amazon_code[amazon_domain]
+      else
+        url.href += '&tag=' + amazon_code[amazon_domain]
 
-        return true
+      return true
         
   ### find all A tags ###
   a = document.getElementsByTagName('a')
