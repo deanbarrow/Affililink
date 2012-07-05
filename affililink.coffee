@@ -14,7 +14,7 @@ affililink = ->
   ### DO NOT EDIT BELOW THIS LINE ###
   
   ### track analytics ###
-  track = (url, site) ->
+  track = (url) ->
     if window.gat_ && window.gat_.getTracker_
       if options['track_clicks']
         url.setAttribute('onclick', "_gaq.push(['_trackEvent', 'Affililink', 'Click', "+url.href+"]);")
@@ -27,7 +27,7 @@ affililink = ->
     if ebay_code['campaign'] and ebay_code['country']
       ebay_domains = ['ebay.com.au', 'ebay.at', 'ebay.be', 'ebay.ca', 'ebay.ch', 'ebay.de', 'ebay.es', 'ebayanuncios.es', 'ebay.fr', 'ebay.ie', 'ebay.it', 'ebay.nl', 'ebay.co.uk', 'ebay.com', 'half.com']
       for ebay_domain in ebay_domains
-        unless domain is ebay_domain or domain.substring(domain.length - ebay_domain.length - 1) is '.'+ebay_domain and domain isnt 'rover.ebay.com'
+        unless domain is ebay_domain or domain.substring(domain.length - ebay_domain.length - 1) is '.'+ebay_domain
           continue
           
         switch ebay_code['country']
@@ -57,13 +57,19 @@ affililink = ->
             ebay_code['code'] = '710-53481-19255-0'
           when 'US'
             ebay_code['code'] = '711-53200-19255-0'
+        
+        ### replace their link ###
+        if domain is 'rover.ebay.com'
+          if options['replace_links']
+            url.href = url.href.replace /campid=([0-9]+)/g, 'campid=' + ebay_code['campaign']
+            url.href = url.href.replace /rover\/1\/([0-9\-]+)/g, 'rover/1/' + ebay_code['code']
+            return true
+          else return true
           
         if domain.substring(domain.length - 'half.com'.length) is 'half.com'
-          url.href = 'http://rover.ebay.com/rover/1/8971-56017-19255-0/1?ff3=8&pub=5574962087&toolid=10001&campid=' + ebay_code['campaign'] + '&customid=affililink&mpre=' + encodeURIComponent(url.href)
-        else
-          url.href = 'http://rover.ebay.com/rover/1/' + ebay_code['code'] + '/1?ff3=4&pub=5574962087&toolid=10001&campid=' + ebay_code['campaign'] + '&customid=affililink&mpre=' + encodeURIComponent(url.href)
+          ebay_code['code'] = '8971-56017-19255-0'
 
-        track url, 'eBay'
+        url.href = 'http://rover.ebay.com/rover/1/' + ebay_code['code'] + '/1?ff3=4&pub=5574962087&toolid=10001&campid=' + ebay_code['campaign'] + '&customid=affililink&mpre=' + encodeURIComponent(url.href)
         return true
         
   ### amazon & javari ###
@@ -85,7 +91,6 @@ affililink = ->
         else
           url.href += '&tag=' + amazon_code[amazon_domain]
 
-        track(url, 'Amazon')
         return true
         
   ### find all A tags ###
@@ -103,6 +108,7 @@ affililink = ->
     else
       amazon url
       ebay url
+      track url
 
 ### only run when page has loaded ###
 if window.attachEvent
