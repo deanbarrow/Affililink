@@ -1,5 +1,5 @@
 ###
-*  Affililink v0.2
+*  Affililink v0.21
 *  http://affililink.com
 *  Created by Dean Barrow (http://deanbarrow.co.uk)
 ###
