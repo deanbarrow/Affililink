@@ -80,8 +80,7 @@ affililink = ->
       unless domain is amazonDomain or domain.substring(domain.length - amazonDomain.length - 1) is '.'+amazonDomain
         continue
       
-      unless amazonCode[amazonDomain]
-        return false
+      unless amazonCode[amazonDomain] then return false
       
       # if existing affiliate tag
       if url.href.search(/tag=([a-z0-9\-]+)/) > -1
@@ -100,19 +99,36 @@ affililink = ->
         url.href += '&tag=' + amazonCode[amazonDomain]
 
       return true
-      
-    addTagToEnd = (universal) ->
-    for link in links
+    
+  # universal function for append to url style tag
+  addTagToEnd = (links) ->
+    for link, tag of links
       unless domain is link or domain.substring(domain.length - link.length - 1) is '.'+link
         continue
       
-      unless universal[link]
-        return false
-        
-      # universalCode = 'appsumo.com': 'rf=1234'
-      # split rf=1234 to get tag and code
-      # TODO: finish this
-
+      unless link and tag then return false
+      
+      match = tag.match /([a-zA-Z0-9\-]+)=([a-zA-Z0-9\-]+)/
+      unless match[2] then return false
+      
+      # if existing affiliate tag
+      match2 = new RegExp(match[1] + '=([a-zA-Z0-9\-]+)')
+      if url.href.search(match2) > -1
+        alert url.href
+        if options['replace_links']
+          url.href = url.href.replace match2, match[1] + '=' + match[2]
+          return true
+        else return false
+      
+      if url.href.substring(url.href.length, url.href.length - 1) is '/'
+        url.href += '?' + match[1] + '=' + match[2]
+        return true
+ 
+      if url.href.match /(\?)/
+        url.href += '&' + match[1] + '=' + match[2]
+      else
+        url.href += '/?' + match[1] + '=' + match[2]
+    
       return true
   
   a = document.getElementsByTagName('a')
@@ -128,7 +144,7 @@ affililink = ->
     else
       amazon
       ebay
-      addTagToEnd universal
+      addTagToEnd universalCode
       track
 
 # run once page has loaded
