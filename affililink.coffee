@@ -114,7 +114,6 @@ affililink = ->
       # if existing affiliate tag
       match2 = new RegExp(match[1] + '=([a-zA-Z0-9\-]+)')
       if url.href.search(match2) > -1
-        alert url.href
         if options['replace_links']
           url.href = url.href.replace match2, match[1] + '=' + match[2]
           return true
@@ -142,10 +141,10 @@ affililink = ->
     unless domain
       continue
     else
-      amazon
-      ebay
-      addTagToEnd universalCode
-      track
+      amazon()
+      ebay()
+      addTagToEnd (universalCode)
+      track()
 
 # run once page has loaded
 if window.attachEvent
