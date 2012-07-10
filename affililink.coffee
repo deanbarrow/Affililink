@@ -7,15 +7,15 @@
 affililink = ->
 
   ### enter your affiliate codes below ###
-  amazonCode = 'amazon.co.uk': '', 'amazon.com': '', 'amazon.de': '', 'amazon.fr': '', 'javari.co.uk': '', 'javari.de': '', 'javari.fr': '', 'amazonsupply.com': '', 'amazonwireless.com': '', 'endless.com': ''
   ebayCode = 'campaign': 0, 'country': ''
-  universalCode = 'appsumo.com': 'rf=1234'
+  universalCode = 'amazon.co.uk': 'tag=', 'amazon.com': 'tag=', 'amazon.de': 'tag=', 'amazon.fr': 'tag=', 'javari.co.uk': 'tag=', 'javari.de': 'tag=', 'javari.fr': 'tag=', 'amazonsupply.com': 'tag=', 'amazonwireless.com': 'tag=', 'endless.com': 'tag=', 'appsumo.com': 'rf=1234'
   options = 'replace_links': true, 'track_views': false, 'track_clicks': true
 
   ### DO NOT EDIT BELOW THIS LINE ###
   
   # track analytics
   track = ->
+    # Google analytics
     if window.gat_ && window.gat_.getTracker_
       if options['track_clicks']
         url.setAttribute('onclick', "_gaq.push(['_trackEvent', 'Affililink', 'Click', "+url.href+"]);")
@@ -73,32 +73,6 @@ affililink = ->
         url.href = 'http://rover.ebay.com/rover/1/' + ebayCode['code'] + '/1?ff3=4&pub=5574962087&toolid=10001&campid=' + ebayCode['campaign'] + '&customid=affililink&mpre=' + encodeURIComponent(url.href)
         return true
         
-  # amazon, javari, endless, etc
-  amazon = ->
-    amazonDomains = ['amazon.co.uk', 'amazon.com', 'amazon.de', 'amazon.fr', 'javari.co.uk', 'javari.de', 'javari.fr', 'amazonsupply.com', 'amazonwireless.com', 'endless.com']
-    for amazonDomain in amazonDomains
-      unless domain is amazonDomain or domain.substring(domain.length - amazonDomain.length - 1) is '.'+amazonDomain
-        continue
-      
-      unless amazonCode[amazonDomain] then return false
-      
-      # if existing affiliate tag
-      if url.href.search(/tag=([a-z0-9\-]+)/) > -1
-        if options['replace_links']
-          url.href = url.href.replace /tag=([a-z0-9\-]+)/g, 'tag=' + amazonCode[amazonDomain]
-          return true
-        else return false
-        
-      # if trailing slash, remove it
-      if url.href.substring(-1, 1) is '/'
-        url.href = url.href.substring(0, url.href.length - 1)
-        
-      unless url.href.split("/")[3]
-        url.href += '?tag=' + amazonCode[amazonDomain]
-      else
-        url.href += '&tag=' + amazonCode[amazonDomain]
-
-      return true
     
   # universal function for append to url style tag
   addTagToEnd = (links) ->
@@ -141,7 +115,6 @@ affililink = ->
     unless domain
       continue
     else
-      amazon()
       ebay()
       addTagToEnd (universalCode)
       track()
