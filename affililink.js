@@ -6,25 +6,22 @@
 var affililink, curronload, newonload;
 affililink = function() {
   /* enter your affiliate codes below */
-  var a, addTagToEnd, amazon, amazonCode, domain, ebay, ebayCode, host, options, track, universalCode, url, _i, _len, _results;
-  amazonCode = {
-    'amazon.co.uk': '',
-    'amazon.com': '',
-    'amazon.de': '',
-    'amazon.fr': '',
-    'javari.co.uk': '',
-    'javari.de': '',
-    'javari.fr': '',
-    'amazonsupply.com': '',
-    'amazonwireless.com': '',
-    'endless.com': ''
-  };
+  var a, addTagToEnd, domain, ebay, ebayCode, host, options, track, universalCode, url, _i, _len, _results;
   ebayCode = {
     'campaign': 0,
     'country': ''
   };
   universalCode = {
-    'appsumo.com': 'rf=1234'
+    'amazon.co.uk': 'tag=',
+    'amazon.com': 'tag=',
+    'amazon.de': 'tag=',
+    'amazon.fr': 'tag=',
+    'javari.co.uk': 'tag=',
+    'javari.de': 'tag=',
+    'javari.fr': 'tag=',
+    'amazonsupply.com': 'tag=',
+    'amazonwireless.com': 'tag=',
+    'endless.com': 'tag='
   };
   options = {
     'replace_links': true,
@@ -109,36 +106,6 @@ affililink = function() {
       }
     }
   };
-  amazon = function() {
-    var amazonDomain, amazonDomains, _i, _len;
-    amazonDomains = ['amazon.co.uk', 'amazon.com', 'amazon.de', 'amazon.fr', 'javari.co.uk', 'javari.de', 'javari.fr', 'amazonsupply.com', 'amazonwireless.com', 'endless.com'];
-    for (_i = 0, _len = amazonDomains.length; _i < _len; _i++) {
-      amazonDomain = amazonDomains[_i];
-      if (!(domain === amazonDomain || domain.substring(domain.length - amazonDomain.length - 1) === '.' + amazonDomain)) {
-        continue;
-      }
-      if (!amazonCode[amazonDomain]) {
-        return false;
-      }
-      if (url.href.search(/tag=([a-z0-9\-]+)/) > -1) {
-        if (options['replace_links']) {
-          url.href = url.href.replace(/tag=([a-z0-9\-]+)/g, 'tag=' + amazonCode[amazonDomain]);
-          return true;
-        } else {
-          return false;
-        }
-      }
-      if (url.href.substring(-1, 1) === '/') {
-        url.href = url.href.substring(0, url.href.length - 1);
-      }
-      if (!url.href.split("/")[3]) {
-        url.href += '?tag=' + amazonCode[amazonDomain];
-      } else {
-        url.href += '&tag=' + amazonCode[amazonDomain];
-      }
-      return true;
-    }
-  };
   addTagToEnd = function(links) {
     var link, match, match2, tag;
     for (link in links) {
@@ -186,7 +153,6 @@ affililink = function() {
     if (!domain) {
       continue;
     } else {
-      amazon();
       ebay();
       addTagToEnd(universalCode);
       track();

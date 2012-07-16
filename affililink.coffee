@@ -8,7 +8,7 @@ affililink = ->
 
   ### enter your affiliate codes below ###
   ebayCode = 'campaign': 0, 'country': ''
-  universalCode = 'amazon.co.uk': 'tag=', 'amazon.com': 'tag=', 'amazon.de': 'tag=', 'amazon.fr': 'tag=', 'javari.co.uk': 'tag=', 'javari.de': 'tag=', 'javari.fr': 'tag=', 'amazonsupply.com': 'tag=', 'amazonwireless.com': 'tag=', 'endless.com': 'tag=', 'appsumo.com': 'rf=1234'
+  universalCode = 'amazon.co.uk': 'tag=', 'amazon.com': 'tag=', 'amazon.de': 'tag=', 'amazon.fr': 'tag=', 'javari.co.uk': 'tag=', 'javari.de': 'tag=', 'javari.fr': 'tag=', 'amazonsupply.com': 'tag=', 'amazonwireless.com': 'tag=', 'endless.com': 'tag='
   options = 'replace_links': true, 'track_views': false, 'track_clicks': true
 
   ### DO NOT EDIT BELOW THIS LINE ###
